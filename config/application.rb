@@ -38,7 +38,7 @@ module WorthSaving
 
     config.generators do |g|
       g.template_engine :haml
-      g.test_framework :rspec, :fixture => true, :views => false
+      g.test_framework :rspec, :fixture => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
     # Configure sensitive parameters which will be filtered from the log file.

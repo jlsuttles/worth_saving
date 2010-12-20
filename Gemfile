@@ -9,7 +9,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'haml'
 
 group :cucumber do
-  gem 'cucumber'
+  gem 'cucumber-rails'
   gem 'capybara'
   gem 'spork'
   gem 'launchy'
@@ -21,6 +21,9 @@ end
 
 group :test, :cucumber do
   gem 'factory_girl_rails'
+  gem 'rails3-generators'
+  gem 'ruby-debug', '0.10.4'
+  gem 'mocha'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
