@@ -1,5 +1,5 @@
 WorthSaving::Application.routes.draw do
-  resources :pages
+  resources :drafts, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
