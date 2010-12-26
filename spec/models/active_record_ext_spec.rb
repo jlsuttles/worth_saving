@@ -3,10 +3,20 @@ require 'worth_saving'
 
 describe ActiveRecord::Base do
   before :each do
-    class Record < ActiveRecord::Base
-    end
     @valid_record_attributes = { :title => 'Valid Title', :body => 'Valid Body' }
     @valid_attributes = { :record_type => 'WorthSavingRecord', :record_id => nil, :content => @valid_record_attributes.to_json }
+    
+    class WorthSavingRecord < ActiveRecord::Base
+      worth_saving
+    end
+    WorthSavingRecord.stubs(:columns).returns([
+      Column.new("id",nil,"integer",false), 
+      Column.new("title",'Default Title',"string",false), 
+      Column.new("body",'Default Body',"text",false)
+    ])
+
+    class Record < ActiveRecord::Base
+    end
     Record.stubs(:columns).returns([
       Column.new("id",nil,"integer",false), 
       Column.new("title",'Default Title',"string",false), 
@@ -15,16 +25,6 @@ describe ActiveRecord::Base do
   end
   
   describe 'inheriting classes' do
-    before :each do
-      class WorthSavingRecord < ActiveRecord::Base
-        worth_saving
-      end
-      WorthSavingRecord.stubs(:columns).returns([
-        Column.new("id",nil,"integer",false), 
-        Column.new("title",'Default Title',"string",false), 
-        Column.new("body",'Default Body',"text",false)
-      ])
-    end
     
     it "should respond to worth_saving" do
       Record.should respond_to(:worth_saving)
