@@ -22,7 +22,7 @@ class Draft < ActiveRecord::Base
   end
   
   def validates_record_existence
-    return true if record_id.nil? || record_type.constantize.respond_to?(:first) && record_type.constantize.first(:conditions => { :id => record_id })
+    return true if record_id.blank? || record_type.constantize.respond_to?(:first) && record_type.constantize.first(:conditions => { :id => record_id })
     !errors.add(:record_id, 'does not correspond to a valid record.')
     false
   end

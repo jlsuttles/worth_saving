@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Draft do
-  Column = ActiveRecord::ConnectionAdapters::Column  
   before :each do
+    class WorthSavingRecord < ActiveRecord::Base
+    end
     @valid_record_attributes = { :title => 'Valid Title', :body => 'Valid Body' }
-    @valid_attributes = { :record_type => 'WorthSavingRecord', :record_id => nil, :content => @valid_record_attributes.to_json }
+    @valid_attributes = { :record_type => 'WorthSavingRecord', :record_id => '', :content => @valid_record_attributes.to_json }
     WorthSavingRecord.stubs(:columns).returns([
       Column.new("id",nil,"integer",false), 
       Column.new("title",'Default Title',"string",false), 
@@ -63,5 +64,10 @@ describe Draft do
       recon_record = @draft.reconstitute
       recon_record.should == false
     end  
+    
+    describe "association" do
+      # create the polymorphic association to :record
+      # not really sure if it will be of any use, since it would only ever retrieve the OLD contents...maybe
+    end
   end
 end
