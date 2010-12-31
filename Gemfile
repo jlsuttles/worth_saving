@@ -19,7 +19,7 @@ group :test do
   gem 'rspec-rails'
 end
 
-group :test, :cucumber do
+group :test, :cucumber, :development do
   gem 'factory_girl_rails'
   gem 'rails3-generators'
   gem 'ruby-debug', '0.10.4'
