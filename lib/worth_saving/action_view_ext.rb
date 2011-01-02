@@ -12,9 +12,9 @@ module WorthSaving
         #     html_options for HTML attrs rather than using the options hash like the other field builders
         def setup_options!(object_name, in_options, out_options = nil)
           out_options ||= in_options
-          object_id = in_options[:object] && in_options[:object].to_param && "_#{in_options[:object].to_param}"
+          object_id = in_options[:object] && in_options[:object].to_param
           if object_name.to_s.camelize.constantize.worth_saving? && in_options.delete(:draft) != false
-            out_options.merge!({ 'data-draft' => object_name + object_id.to_s })
+            out_options.merge!({ 'data-record_type' => object_name, 'data-record_id' => object_id.to_s })
           end
         end
 
@@ -35,7 +35,6 @@ module WorthSaving
     #    so nobody ever fucks it up.  It passes specs without it unless using the method without being inside a form_for block
     module InstanceMethods
       def draft_message(*args)
-        debugger
         "This shit has a draft yo"
       end
       

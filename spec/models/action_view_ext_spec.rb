@@ -36,35 +36,43 @@ describe ActionView::Base do
     end
     
     describe "and the record is new" do
-      @worth_saving_record.stubs(:persisted?).returns(false)
-      it "text_field should include a data-draft attribute with value equal to the name of the model" do
+      before :each do
+        @worth_saving_record.stubs(:persisted?).returns(false)
+      end
+
+      it "text_field should include data-record_type and a data-record_id attributes (model name and blank respectively)" do
         @view.form_for @worth_saving_record do |f|
-          f.text_field(:title).should =~ /data-draft="worth_saving_record"/
+          f.text_field(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_field(:title).should =~ / data-record_id="" /
         end
       end
 
       it "select should include a data-draft attribute with value equal to the name of the model" do
         @select_options_array = [1,2,3]
         @view.form_for @worth_saving_record do |f|
-          f.select(:title, @select_options_array).should =~ /data-draft="worth_saving_record"/
+          f.select(:title, @select_options_array).should =~ / data-record_type="worth_saving_record" /
+          f.select(:title, @select_options_array).should =~ / data-record_id="" /
         end
       end
 
       it "check_box should include a data-draft attribute with value equal to the name of the model" do
         @view.form_for @worth_saving_record do |f|
-          f.check_box(:title).should =~ /data-draft="worth_saving_record"/
+          f.check_box(:title).should =~ / data-record_type="worth_saving_record" /
+          f.check_box(:title).should =~ / data-record_id="" /
         end
       end
 
       it "text_area should include a data-draft attribute with value equal to the name of the model" do
         @view.form_for @worth_saving_record do |f|
-          f.text_area(:title).should =~ /data-draft="worth_saving_record"/
+          f.text_area(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_area(:title).should =~ / data-record_id="" /
         end
       end
 
       it "radio_button should include a data-draft attribute with value equal to the name of the model" do
         @view.form_for @worth_saving_record do |f|
-          f.radio_button(:title, 1).should =~ /data-draft="worth_saving_record"/
+          f.radio_button(:title, 1).should =~ / data-record_type="worth_saving_record" /
+          f.radio_button(:title, 1).should =~ / data-record_id="" /
         end
       end
     end
@@ -76,64 +84,74 @@ describe ActionView::Base do
       
       it "text_field should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.text_field(:title).should =~ /data-draft="worth_saving_record_1254"/
+          f.text_field(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_field(:title).should =~ / data-record_id="1254" /
         end
       end
       
       it "select should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @select_options_array = [1,2,3]
         @view.form_for @worth_saving_record do |f|
-          f.select(:title, @select_options_array).should =~ /data-draft="worth_saving_record_1254"/
+          f.select(:title, @select_options_array).should =~ / data-record_type="worth_saving_record" /
+          f.select(:title, @select_options_array).should =~ / data-record_id="1254" /
         end
       end
 
       it "check_box should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.check_box(:title).should =~ /data-draft="worth_saving_record_1254"/
+          f.check_box(:title).should =~ / data-record_type="worth_saving_record" /
+          f.check_box(:title).should =~ / data-record_id="1254" /
         end
       end
 
       it "text_area should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.text_area(:title).should =~ /data-draft="worth_saving_record_1254"/
+          f.text_area(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_area(:title).should =~ / data-record_id="1254" /
         end
       end
 
       it "radio_button should include a data-draft attribute with value equal to the name of the modelwith its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.radio_button(:title, 1).should =~ /data-draft="worth_saving_record_1254"/
+          f.radio_button(:title, 1).should =~ / data-record_type="worth_saving_record" /
+          f.radio_button(:title, 1).should =~ / data-record_id="1254" /
         end
       end
     end  # describe "and the record is from the database"
 
     it "text_field should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.text_field(:title, :draft => false ).should_not =~ /data-draft/      
+        f.text_field(:title, :draft => false).should_not =~ /data-record_type/
+        f.text_field(:title, :draft => false).should_not =~ /data-record_id/
       end
     end
 
     it "select should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @select_options_array = [1,2,3]
       @view.form_for @worth_saving_record do |f|
-        f.select(:title, @select_options_array, :draft => false).should_not =~ /data-draft/
+        f.select(:title, @select_options_array, :draft => false).should_not =~ /data-record_type/
+        f.select(:title, @select_options_array, :draft => false).should_not =~ /data-record_id/
       end
     end
         
     it "check_box should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.check_box(:title, :draft => false).should_not =~ /data-draft/
+        f.check_box(:title, :draft => false).should_not =~ /data-record_type/
+        f.check_box(:title, :draft => false).should_not =~ /data-record_id/
       end
     end
         
     it "text_area should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.text_area(:title, :draft => false).should_not =~ /data-draft/
+        f.text_area(:title, :draft => false).should_not =~ /data-record_type/
+        f.text_area(:title, :draft => false).should_not =~ /data-record_id/
       end
     end
         
     it "radio_buton should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.radio_button(:title, 1, :draft => false).should_not =~ /data-draft/
+        f.radio_button(:title, 1, :draft => false).should_not =~ /data-record_type/
+        f.radio_button(:title, 1, :draft => false).should_not =~ /data-record_id/
       end
     end
         
@@ -142,24 +160,29 @@ describe ActionView::Base do
   describe "when creating a form for a record that is NOT worth_saving" do
     
     it "text_field should not include a data-draft attribute" do
-      ActionView::Base.new.text_field('record', :title, {}).should_not =~ /data-draft/
+      ActionView::Base.new.text_field('record', :title, {}).should_not =~ /data-record_type/
+      ActionView::Base.new.text_field('record', :title, {}).should_not =~ /data-record_id/
     end
     
     it "select should not include a data-draft attribute" do
       @select_options_array = [1,2,3]
-      ActionView::Base.new.select('record', :title, @select_options_array).should_not =~ /data-draft/
+      ActionView::Base.new.select('record', :title, @select_options_array).should_not =~ /data-record_type/
+      ActionView::Base.new.select('record', :title, @select_options_array).should_not =~ /data-record_id/    
     end
     
     it "check_box should not include a data-draft attribute" do
-      ActionView::Base.new.check_box('record', :title, {}).should_not =~ /data-draft/
+      ActionView::Base.new.check_box('record', :title, {}).should_not =~ /data-record_type/
+      ActionView::Base.new.check_box('record', :title, {}).should_not =~ /data-record_id/    
     end
     
     it "text_area should not include a data-draft attribute" do
-      ActionView::Base.new.text_area('record', :title, {}).should_not =~ /data-draft/
+      ActionView::Base.new.text_area('record', :title, {}).should_not =~ /data-record_type/
+      ActionView::Base.new.text_area('record', :title, {}).should_not =~ /data-record_id/
     end
     
     it "radio_button should not include a data-draft attribute" do
-      ActionView::Base.new.radio_button('record', :title, 1, {}).should_not =~ /data-draft/
+      ActionView::Base.new.radio_button('record', :title, 1, {}).should_not =~ /data-record_type/
+      ActionView::Base.new.radio_button('record', :title, 1, {}).should_not =~ /data-record_id/
     end
     
   end
