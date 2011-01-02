@@ -13,8 +13,9 @@ module WorthSaving
         def setup_options!(object_name, in_options, out_options = nil)
           out_options ||= in_options
           object_id = in_options[:object] && in_options[:object].to_param
-          if object_name.to_s.camelize.constantize.worth_saving? && in_options.delete(:draft) != false
-            out_options.merge!({ 'data-record_type' => object_name, 'data-record_id' => object_id.to_s })
+          record_type = object_name.to_s.camelize
+          if record_type.constantize.worth_saving? && in_options.delete(:draft) != false
+            out_options.merge!({ 'data-record_type' => record_type, 'data-record_id' => object_id.to_s })
           end
         end
 
@@ -34,9 +35,6 @@ module WorthSaving
     # All of these <something>_with_worth... methods will have a .to_s after object_name.  That should be put into the spec
     #    so nobody ever fucks it up.  It passes specs without it unless using the method without being inside a form_for block
     module InstanceMethods
-      def draft_message(*args)
-        "This shit has a draft yo"
-      end
       
       def text_field_with_worth_saving_check(object_name, method, options = {})
         ActionView::Base.setup_options!(object_name, options)

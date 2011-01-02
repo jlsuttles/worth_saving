@@ -42,7 +42,7 @@ describe ActionView::Base do
 
       it "text_field should include data-record_type and a data-record_id attributes (model name and blank respectively)" do
         @view.form_for @worth_saving_record do |f|
-          f.text_field(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_field(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_field(:title).should =~ / data-record_id="" /
         end
       end
@@ -50,28 +50,28 @@ describe ActionView::Base do
       it "select should include a data-draft attribute with value equal to the name of the model" do
         @select_options_array = [1,2,3]
         @view.form_for @worth_saving_record do |f|
-          f.select(:title, @select_options_array).should =~ / data-record_type="worth_saving_record" /
+          f.select(:title, @select_options_array).should =~ / data-record_type="WorthSavingRecord" /
           f.select(:title, @select_options_array).should =~ / data-record_id="" /
         end
       end
 
       it "check_box should include a data-draft attribute with value equal to the name of the model" do
         @view.form_for @worth_saving_record do |f|
-          f.check_box(:title).should =~ / data-record_type="worth_saving_record" /
+          f.check_box(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.check_box(:title).should =~ / data-record_id="" /
         end
       end
 
       it "text_area should include a data-draft attribute with value equal to the name of the model" do
         @view.form_for @worth_saving_record do |f|
-          f.text_area(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_area(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_area(:title).should =~ / data-record_id="" /
         end
       end
 
       it "radio_button should include a data-draft attribute with value equal to the name of the model" do
         @view.form_for @worth_saving_record do |f|
-          f.radio_button(:title, 1).should =~ / data-record_type="worth_saving_record" /
+          f.radio_button(:title, 1).should =~ / data-record_type="WorthSavingRecord" /
           f.radio_button(:title, 1).should =~ / data-record_id="" /
         end
       end
@@ -84,7 +84,7 @@ describe ActionView::Base do
       
       it "text_field should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.text_field(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_field(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_field(:title).should =~ / data-record_id="1254" /
         end
       end
@@ -92,28 +92,28 @@ describe ActionView::Base do
       it "select should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @select_options_array = [1,2,3]
         @view.form_for @worth_saving_record do |f|
-          f.select(:title, @select_options_array).should =~ / data-record_type="worth_saving_record" /
+          f.select(:title, @select_options_array).should =~ / data-record_type="WorthSavingRecord" /
           f.select(:title, @select_options_array).should =~ / data-record_id="1254" /
         end
       end
 
       it "check_box should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.check_box(:title).should =~ / data-record_type="worth_saving_record" /
+          f.check_box(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.check_box(:title).should =~ / data-record_id="1254" /
         end
       end
 
       it "text_area should include a data-draft attribute with value equal to the name of the model with its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.text_area(:title).should =~ / data-record_type="worth_saving_record" /
+          f.text_area(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_area(:title).should =~ / data-record_id="1254" /
         end
       end
 
       it "radio_button should include a data-draft attribute with value equal to the name of the modelwith its to_param" do
         @view.form_for @worth_saving_record do |f|
-          f.radio_button(:title, 1).should =~ / data-record_type="worth_saving_record" /
+          f.radio_button(:title, 1).should =~ / data-record_type="WorthSavingRecord" /
           f.radio_button(:title, 1).should =~ / data-record_id="1254" /
         end
       end
