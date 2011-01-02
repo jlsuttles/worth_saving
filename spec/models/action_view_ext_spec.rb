@@ -44,6 +44,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.text_field(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_field(:title).should =~ / data-record_id="" /
+          f.text_field(:title).should =~ / data-record_field="title" /
         end
       end
 
@@ -52,6 +53,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.select(:title, @select_options_array).should =~ / data-record_type="WorthSavingRecord" /
           f.select(:title, @select_options_array).should =~ / data-record_id="" /
+          f.select(:title, @select_options_array).should =~ / data-record_field="title" /
         end
       end
 
@@ -59,6 +61,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.check_box(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.check_box(:title).should =~ / data-record_id="" /
+          f.check_box(:title).should =~ / data-record_field="title" /
         end
       end
 
@@ -66,6 +69,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.text_area(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_area(:title).should =~ / data-record_id="" /
+          f.text_area(:title).should =~ / data-record_field="title" /
         end
       end
 
@@ -73,6 +77,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.radio_button(:title, 1).should =~ / data-record_type="WorthSavingRecord" /
           f.radio_button(:title, 1).should =~ / data-record_id="" /
+          f.radio_button(:title, 1).should =~ / data-record_field="title" /
         end
       end
     end
@@ -86,6 +91,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.text_field(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_field(:title).should =~ / data-record_id="1254" /
+          f.text_field(:title).should =~ / data-record_field="title" /
         end
       end
       
@@ -94,6 +100,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.select(:title, @select_options_array).should =~ / data-record_type="WorthSavingRecord" /
           f.select(:title, @select_options_array).should =~ / data-record_id="1254" /
+          f.select(:title, @select_options_array).should =~ / data-record_field="title" /
         end
       end
 
@@ -101,6 +108,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.check_box(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.check_box(:title).should =~ / data-record_id="1254" /
+          f.check_box(:title).should =~ / data-record_field="title" /
         end
       end
 
@@ -108,6 +116,7 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.text_area(:title).should =~ / data-record_type="WorthSavingRecord" /
           f.text_area(:title).should =~ / data-record_id="1254" /
+          f.text_area(:title).should =~ / data-record_field="title" /
         end
       end
 
@@ -115,43 +124,39 @@ describe ActionView::Base do
         @view.form_for @worth_saving_record do |f|
           f.radio_button(:title, 1).should =~ / data-record_type="WorthSavingRecord" /
           f.radio_button(:title, 1).should =~ / data-record_id="1254" /
+          f.radio_button(:title, 1).should =~ / data-record_field="title" /
         end
       end
     end  # describe "and the record is from the database"
 
     it "text_field should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.text_field(:title, :draft => false).should_not =~ /data-record_type/
-        f.text_field(:title, :draft => false).should_not =~ /data-record_id/
+        f.text_field(:title, :draft => false).should_not =~ /data-record/
       end
     end
 
     it "select should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @select_options_array = [1,2,3]
       @view.form_for @worth_saving_record do |f|
-        f.select(:title, @select_options_array, :draft => false).should_not =~ /data-record_type/
-        f.select(:title, @select_options_array, :draft => false).should_not =~ /data-record_id/
+        f.select(:title, @select_options_array, :draft => false).should_not =~ /data-record/
       end
     end
         
     it "check_box should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.check_box(:title, :draft => false).should_not =~ /data-record_type/
-        f.check_box(:title, :draft => false).should_not =~ /data-record_id/
+        f.check_box(:title, :draft => false).should_not =~ /data-record/
       end
     end
         
     it "text_area should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.text_area(:title, :draft => false).should_not =~ /data-record_type/
-        f.text_area(:title, :draft => false).should_not =~ /data-record_id/
+        f.text_area(:title, :draft => false).should_not =~ /data-record/
       end
     end
         
     it "radio_buton should not include a data-draft attribute if it is fed :draft => false in the options hash" do
       @view.form_for @worth_saving_record do |f|
-        f.radio_button(:title, 1, :draft => false).should_not =~ /data-record_type/
-        f.radio_button(:title, 1, :draft => false).should_not =~ /data-record_id/
+        f.radio_button(:title, 1, :draft => false).should_not =~ /data-record/
       end
     end
         

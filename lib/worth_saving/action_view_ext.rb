@@ -10,12 +10,13 @@ module WorthSaving
         # def setup_options!, given the ! not because it changes the caller but b/c it changes the arguments (options)
         # The two separate options arrays are the same except in the case of the 'select' field builder, which has
         #     html_options for HTML attrs rather than using the options hash like the other field builders
-        def setup_options!(object_name, in_options, out_options = nil)
+        def setup_options!(object_name, field_name, in_options, out_options = nil)
           out_options ||= in_options
           object_id = in_options[:object] && in_options[:object].to_param
           record_type = object_name.to_s.camelize
           if record_type.constantize.worth_saving? && in_options.delete(:draft) != false
-            out_options.merge!({ 'data-record_type' => record_type, 'data-record_id' => object_id.to_s })
+            out_options.merge!({ 'data-record_type' => record_type, 
+              'data-record_id' => object_id.to_s, 'data-record_field' => field_name })
           end
         end
 
@@ -37,27 +38,27 @@ module WorthSaving
     module InstanceMethods
       
       def text_field_with_worth_saving_check(object_name, method, options = {})
-        ActionView::Base.setup_options!(object_name, options)
+        ActionView::Base.setup_options!(object_name, method, options)
         text_field_without_worth_saving_check(object_name, method, options)
       end
 
       def select_with_worth_saving_check(object_name, method, choices, options = {}, html_options = {})
-        ActionView::Base.setup_options!(object_name, options, html_options)
+        ActionView::Base.setup_options!(object_name, method, options, html_options)
         select_without_worth_saving_check(object_name, method, choices, options, html_options)
       end
 
       def check_box_with_worth_saving_check(object_name, method, options = {}, checked_value = "1", unchecked_value = "0")
-        ActionView::Base.setup_options!(object_name, options)
+        ActionView::Base.setup_options!(object_name, method, options)
         check_box_without_worth_saving_check(object_name, method, options, checked_value, unchecked_value)
       end
 
       def text_area_with_worth_saving_check(object_name, method, options = {})
-        ActionView::Base.setup_options!(object_name, options)
+        ActionView::Base.setup_options!(object_name, method, options)
         text_area_without_worth_saving_check(object_name, method, options)
       end
 
       def radio_button_with_worth_saving_check(object_name, method, tag_value, options = {})
-        ActionView::Base.setup_options!(object_name, options)
+        ActionView::Base.setup_options!(object_name, method, options)
         radio_button_without_worth_saving_check(object_name, method, tag_value, options)
       end
       
