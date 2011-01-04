@@ -16,5 +16,9 @@ class DraftsController < ApplicationController
       render :status => 404
     end
   end
+  
+  def new
+    @draft = Draft.first
+  end
 
 end

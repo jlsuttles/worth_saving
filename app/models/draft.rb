@@ -1,6 +1,9 @@
 class Draft < ActiveRecord::Base
+  # belongs_to :record, :polymorphic => true
   before_validation :validates_record_type
   before_validation :validates_record_existence
+worth_saving
+  # validates_uniqueness_of :record_id, :scope => :record_type, :message => 'already has a draft.'
   
   def reconstitute
     if record_id.nil?

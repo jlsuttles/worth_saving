@@ -1,0 +1,10 @@
+= form_for @draft do |f|
+  = f.draft_message
+  =# hidden_field :draft, :record_id, { :value => @draft.id }
+  =# hidden_field :draft, :record_type, { :value => 'Draft' }
+  .input
+    = f.label :record_type
+    = f.text_field :record_type
+  .input
+    = f.label :content
+    = f.text_area :content
