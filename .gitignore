@@ -3,9 +3,3 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .*.sw*
-
-cucumber*
-features/*
-page*.rb
-db/migrate/*page*
-app/views/pages/*
