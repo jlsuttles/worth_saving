@@ -43,5 +43,8 @@ module WorthSaving
     end
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    # Disable the asset pipeline for now
+    config.assets.enabled = false # <== this is temporary
   end
 end
